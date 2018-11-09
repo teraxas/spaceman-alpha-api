@@ -8,8 +8,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Swashbuckle.AspNetCore.Swagger;
+using Spaceman.Service.Utilities;
+using Spaceman.Service.Services;
 
-namespace SpacemanAPI
+namespace Spaceman
 {
     public class Startup
     {
@@ -24,6 +27,16 @@ namespace SpacemanAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
+            });
+
+            services.Configure<Service.Options>(Configuration);
+            services.AddSingleton<MongoProvider>();
+            services.AddSingleton<IPlayerService, PlayerService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -33,6 +46,12 @@ namespace SpacemanAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
 
             app.UseMvc();
         }

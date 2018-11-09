@@ -3,12 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Spaceman.Service.Models;
+using Spaceman.Service.Services;
 
-namespace SpacemanAPI.Controllers
+namespace Spaceman.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class PlayerController : Controller
     {
+        public IPlayerService Service { get; }
+
+        public PlayerController(IPlayerService service)
+        {
+            Service = service;
+        }
+
         // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
@@ -25,8 +34,9 @@ namespace SpacemanAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody]string value)
+        public void Post([FromBody] Player value)
         {
+            Service.Create(value);
         }
 
         // PUT api/values/5
