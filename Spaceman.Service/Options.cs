@@ -6,7 +6,7 @@ namespace Spaceman.Service
 {
     public class Options
     {
-        public object Password { get; internal set; }
-        public object Username { get; internal set; }
+        public string ConnectionString { get; set; }
+        public string DBName { get; set; }
     }
 }

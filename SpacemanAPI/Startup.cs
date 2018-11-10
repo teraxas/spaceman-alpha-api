@@ -11,6 +11,8 @@ using Microsoft.Extensions.Options;
 using Swashbuckle.AspNetCore.Swagger;
 using Spaceman.Service.Utilities;
 using Spaceman.Service.Services;
+using AutoMapper;
+using Spaceman.Service.Models;
 
 namespace Spaceman
 {
@@ -19,9 +21,11 @@ namespace Spaceman
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            MapperConfiguration = ConfigureMapper();
         }
 
         public IConfiguration Configuration { get; }
+        public MapperConfiguration MapperConfiguration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -33,7 +37,9 @@ namespace Spaceman
                 c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
             });
 
-            services.Configure<Service.Options>(Configuration);
+            services.Configure<Service.Options>(Configuration.GetSection("SpacemanService"));
+            services.AddSingleton<IMapper>(new Mapper(MapperConfiguration));
+
             services.AddSingleton<MongoProvider>();
             services.AddSingleton<IPlayerService, PlayerService>();
 
@@ -55,5 +61,13 @@ namespace Spaceman
 
             app.UseMvc();
         }
+
+        private MapperConfiguration ConfigureMapper()
+        {
+            return new MapperConfiguration(cfg => {
+                cfg.AddProfile<Service.MapperProfile>();
+            });
+        }
+
     }
 }
