@@ -1,10 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Spaceman.Service.Models;
 using Spaceman.Service.Services;
 
@@ -14,70 +19,88 @@ namespace Spaceman.Controllers
     [Route("api/[controller]")]
     public class PlayerController : Controller
     {
-        public IPlayerService Service { get; }
-        public IMapper Mapper { get; }
+        private readonly IPlayerService _service;
+        private readonly IMapper _mapper;
+        private readonly Options _options;
 
-        public PlayerController(IPlayerService service, IMapper mapper)
+        public PlayerController(IPlayerService service, IOptions<Spaceman.Options> options, IMapper mapper)
         {
-            Service = service;
-            Mapper = mapper;
+            _service = service;
+            _mapper = mapper;
+            _options = options.Value;
         }
-        
+
+        /// <summary>
+        /// Get current Player profile
+        /// </summary>
+        /// <returns>Player</returns>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<PlayerDTO> Get()
         {
-            return new string[] { "value1", "value2" };
+            var username = User.Identity.Name;
+            var player = await _service.GetByUsername(username);
+            return _mapper.Map<PlayerDTO>(player);
         }
-        
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-        
+
+        /// <summary>
+        /// Create new Player profile
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public PlayerDTO Create([FromBody] Player value)
+        public PlayerDTO Create([FromBody] PlayerCreateDTO value)
         {
-            return Mapper.Map<PlayerDTO>(Service.Create(value));
+            var player = Mapper.Map<Player>(value);
+            player = _service.Create(player, value.Password);
+            return _mapper.Map<PlayerDTO>(player);
         }
         
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
-
+        /// <summary>
+        /// Authenticate and get new JWT token
+        /// </summary>
+        /// <param name="userDto"></param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public IActionResult Authenticate([FromBody]PlayerAuth userDto)
+        public async Task<PlayerAuthenticated> Authenticate([FromBody]PlayerAuth userDto)
         {
-            var user = Service.Authenticate(userDto.Username, userDto.Password);
+            var player = await _service.Authenticate(userDto.Username, userDto.Password);
 
-            if (user == null)
-                return BadRequest(new { message = "Username or password is incorrect" });
+            if (player == null)
+                return null;
 
-            //var tokenHandler = new JwtSecurityTokenHandler();
-            //var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = new ClaimsIdentity(new Claim[]
-            //    {
-            //        new Claim(ClaimTypes.Name, user.Id.ToString())
-            //    }),
-            //    Expires = DateTime.UtcNow.AddDays(7),
-            //    SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
-            //};
-            //var token = tokenHandler.CreateToken(tokenDescriptor);
-            //var tokenString = tokenHandler.WriteToken(token);
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var key = Encoding.ASCII.GetBytes(_options.Secret);
+            var tokenDescriptor = new SecurityTokenDescriptor
+            {
+                Subject = new ClaimsIdentity(new Claim[]
+                {
+                    new Claim(ClaimTypes.Name, player.Username)
+                }),
+                Expires = DateTime.UtcNow.AddDays(7),
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+            };
+            var token = tokenHandler.CreateToken(tokenDescriptor);
+            var tokenString = tokenHandler.WriteToken(token);
 
-            // return basic user info (without password) and token to store client side
-            return Ok(user);
+            //  return basic user info (without password) and token to store client side
+            return new PlayerAuthenticated {
+                Player = _mapper.Map<PlayerDTO>(player),
+                Token = tokenString
+            };
         }
     }
 
     public class PlayerAuth
     {
-        public string Username { get; internal set; }
-        public string Password { get; internal set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+    }
+
+    public class PlayerAuthenticated
+    {
+        public PlayerDTO Player { get; set; }
+        public string Token { get; set; }
     }
 }

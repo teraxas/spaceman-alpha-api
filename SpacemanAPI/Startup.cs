@@ -13,6 +13,9 @@ using Spaceman.Service.Utilities;
 using Spaceman.Service.Services;
 using AutoMapper;
 using Spaceman.Service.Models;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Spaceman
 {
@@ -32,11 +35,46 @@ namespace Spaceman
         {
             services.AddMvc();
 
+            var appSettings = Configuration.GetSection("Spaceman").Get<Options>();
+            var key = Encoding.ASCII.GetBytes(appSettings.Secret);
+            services.AddAuthentication(x =>
+            {
+                x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(x =>
+            {
+                x.Events = new JwtBearerEvents
+                {
+                    OnTokenValidated = async context =>
+                    {
+                        var userService = context.HttpContext.RequestServices.GetRequiredService<IPlayerService>();
+                        var userId = context.Principal.Identity.Name;
+                        var user = await userService.GetByUsername(userId);
+                        if (user == null)
+                        {
+                            // return unauthorized if user no longer exists
+                            context.Fail("Unauthorized");
+                        }
+                    }
+                };
+                x.RequireHttpsMetadata = false;
+                x.SaveToken = true;
+                x.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
             });
 
+            services.Configure<Options>(Configuration.GetSection("Spaceman"));
             services.Configure<Service.Options>(Configuration.GetSection("SpacemanService"));
             services.AddSingleton<IMapper>(new Mapper(MapperConfiguration));
 
@@ -52,7 +90,16 @@ namespace Spaceman
             {
                 app.UseDeveloperExceptionPage();
             }
-            
+
+            // global cors policy
+            app.UseCors(x => x
+                .AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
+            app.UseAuthentication();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

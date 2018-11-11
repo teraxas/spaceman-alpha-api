@@ -4,5 +4,25 @@
         <name>Spaceman.Api</name>
     </assembly>
     <members>
+        <member name="M:Spaceman.Controllers.PlayerController.Get">
+            <summary>
+            Get current Player profile
+            </summary>
+            <returns>Player</returns>
+        </member>
+        <member name="M:Spaceman.Controllers.PlayerController.Create(Spaceman.Service.Models.PlayerCreateDTO)">
+            <summary>
+            Create new Player profile
+            </summary>
+            <param name="value"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Spaceman.Controllers.PlayerController.Authenticate(Spaceman.Controllers.PlayerAuth)">
+            <summary>
+            Authenticate and get new JWT token
+            </summary>
+            <param name="userDto"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

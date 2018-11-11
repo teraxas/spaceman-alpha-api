@@ -11,6 +11,8 @@ namespace Spaceman.Service
         public MapperProfile()
         {
             CreateMap<Player, PlayerDTO>();
+            CreateMap<PlayerDTO, Player>();
+            CreateMap<PlayerCreateDTO, Player>();
         }
     }
 }

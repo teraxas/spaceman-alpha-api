@@ -42,11 +42,29 @@ namespace Spaceman.Service.Services
             return player;
         }
 
-        public Player Create(Player player)
+        public Player Create(Player player, string password)
         {
+            if (string.IsNullOrWhiteSpace(password))
+                throw new AppException("Password is required");
+
+            if (CheckIfUsernameExists(player.Username))
+                throw new AppException("Username \"" + player.Username + "\" is already taken");
+
+            byte[] passwordHash, passwordSalt;
+            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+
             player.Id = Guid.NewGuid();
+            player.PasswordHash = passwordHash;
+            player.PasswordSalt = passwordSalt;
+
             _db.PlayerCollection.InsertOne(player);
             return player;
+        }
+
+        public bool CheckIfUsernameExists(string username)
+        {
+            FilterDefinition<Player> filter = Builders<Player>.Filter.Eq(p => p.Username, username);
+            return _db.PlayerCollection.CountDocuments(filter) > 0;
         }
 
         public async Task<Player> GetByUsername(string username)

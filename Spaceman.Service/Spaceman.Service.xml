@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Spaceman.Service</name>
+    </assembly>
+    <members>
+        <member name="T:Spaceman.Service.Models.Player">
+            <summary>
+            Player model for usage inside the services.
+            </summary>
+        </member>
+        <member name="T:Spaceman.Service.Models.PlayerDTO">
+            <summary>
+            DTO for public Player data transfer
+            </summary>
+        </member>
+        <member name="T:Spaceman.Service.Models.PlayerCreateDTO">
+            <summary>
+            DTO for Player creation.
+            Adds Password property to PlayerDTO
+            </summary>
+        </member>
+    </members>
+</doc>
