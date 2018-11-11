@@ -59,13 +59,13 @@ namespace Spaceman.Controllers
         /// <summary>
         /// Authenticate and get new JWT token
         /// </summary>
-        /// <param name="userDto"></param>
+        /// <param name="auth"></param>
         /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("authenticate")]
-        public async Task<PlayerAuthenticated> Authenticate([FromBody]PlayerAuth userDto)
+        public async Task<PlayerAuthenticated> Authenticate([FromBody]PlayerAuth auth)
         {
-            var player = await _service.Authenticate(userDto.Username, userDto.Password);
+            var player = await _service.Authenticate(auth.Username, auth.Password);
 
             if (player == null)
                 return null;

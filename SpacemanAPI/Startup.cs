@@ -72,6 +72,17 @@ namespace Spaceman
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
+                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[]{ } }
+                });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                    In = "header",
+                    Name = "Authorization",
+                    Type = "apiKey"
+                });
             });
 
             services.Configure<Options>(Configuration.GetSection("Spaceman"));

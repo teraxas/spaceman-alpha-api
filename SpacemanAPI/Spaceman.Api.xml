@@ -21,7 +21,7 @@
             <summary>
             Authenticate and get new JWT token
             </summary>
-            <param name="userDto"></param>
+            <param name="auth"></param>
             <returns></returns>
         </member>
     </members>
