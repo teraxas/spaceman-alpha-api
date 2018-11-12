@@ -5,6 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <RootNamespace>Spaceman</RootNamespace>
     <StartupObject></StartupObject>
+    <UserSecretsId>e56788a1-297b-4c03-8984-f2f997abf640</UserSecretsId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
