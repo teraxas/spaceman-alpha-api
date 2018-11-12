@@ -17,4 +17,10 @@
     <PackageReference Include="MongoDB.Driver" Version="2.7.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Spaceman.Service.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

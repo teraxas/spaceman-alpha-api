@@ -34,4 +34,10 @@
     <ProjectReference Include="..\Spaceman.Service\Spaceman.Service.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Spaceman.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
