@@ -18,4 +18,20 @@ namespace Spaceman.Service.Models
 
     }
 
+    public enum WorldObjectType
+    {
+        Ship,
+        Station,
+        Debris,
+    }
+
+    public enum WorldObjectProperty
+    {
+        Speed,
+        WarpPower,
+        ShieldHP,
+        HullHP,
+        Sectors,
+    }
+
 }
