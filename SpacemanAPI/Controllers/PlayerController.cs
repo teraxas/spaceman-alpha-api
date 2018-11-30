@@ -49,10 +49,10 @@ namespace Spaceman.Controllers
         /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
-        public PlayerDTO Create([FromBody] PlayerCreateDTO value)
+        public async Task<PlayerDTO> Create([FromBody] PlayerCreateDTO value)
         {
             var player = Mapper.Map<Player>(value);
-            player = _service.Create(player, value.Password);
+            player = await _service.Create(player, value.Password);
             return _mapper.Map<PlayerDTO>(player);
         }
         

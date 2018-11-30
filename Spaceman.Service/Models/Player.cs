@@ -26,6 +26,12 @@ namespace Spaceman.Service.Models
     {
         public string Username { get; set; }
         public string Name { get; set; }
+        public PlayerType Type { get; set; }
+
+        public PlayerDTO()
+        {
+            Type = PlayerType.REGULAR;
+        }
     }
 
     /// <summary>
@@ -34,7 +40,18 @@ namespace Spaceman.Service.Models
     /// </summary>
     public class PlayerCreateDTO : PlayerDTO
     {
-        public PlayerCreateDTO() : base() { }
         public string Password { get; set; }
+
+        public PlayerCreateDTO() : base() { }
     }
+
+    /// <summary>
+    /// Type of player
+    /// </summary>
+    public enum PlayerType
+    {
+        REGULAR,
+        ADMIN
+    }
+
 }

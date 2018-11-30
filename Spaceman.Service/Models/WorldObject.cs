@@ -7,8 +7,9 @@ namespace Spaceman.Service.Models
     public class WorldObject
     {
         public Guid Id { get; set; }
-        public WorldObjectType Type { get; set; }
+        public string Type { get; set; }
         public string Name { get; set; }
+        public WorldLocation Location { get; set; }
         public Dictionary<WorldObjectProperty, int> Properties { get; set; }
 
         public WorldObject()
@@ -18,13 +19,6 @@ namespace Spaceman.Service.Models
 
     }
 
-    public enum WorldObjectType
-    {
-        Ship,
-        Station,
-        Debris,
-    }
-
     public enum WorldObjectProperty
     {
         Speed,
@@ -32,6 +26,7 @@ namespace Spaceman.Service.Models
         ShieldHP,
         HullHP,
         Sectors,
+        ShipSlots,
     }
 
 }

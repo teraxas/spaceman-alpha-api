@@ -20,10 +20,5 @@
             Adds Password property to PlayerDTO
             </summary>
         </member>
-        <member name="T:Spaceman.Service.Models.WorldObjectProperty">
-            <summary>
-            Exclusively integer typed properties
-            </summary>
-        </member>
     </members>
 </doc>

@@ -44,20 +44,6 @@ namespace Spaceman
             })
             .AddJwtBearer(x =>
             {
-                x.Events = new JwtBearerEvents
-                {
-                    OnTokenValidated = async context =>
-                    {
-                        var userService = context.HttpContext.RequestServices.GetRequiredService<IPlayerService>();
-                        var userId = context.Principal.Identity.Name;
-                        var user = await userService.GetByUsername(userId);
-                        if (user == null)
-                        {
-                            // return unauthorized if user no longer exists
-                            context.Fail("Unauthorized");
-                        }
-                    }
-                };
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters

@@ -11,6 +11,7 @@ namespace Spaceman.Service.Services
 {
     public class PlayerService : IPlayerService
     {
+
         private readonly MongoProvider _db;
 
         public PlayerService(
@@ -42,12 +43,12 @@ namespace Spaceman.Service.Services
             return player;
         }
 
-        public Player Create(Player player, string password)
+        public async Task<Player> Create(Player player, string password)
         {
             if (string.IsNullOrWhiteSpace(password))
                 throw new AppException("Password is required");
 
-            if (CheckIfUsernameExists(player.Username))
+            if (await CheckIfUsernameExists(player.Username))
                 throw new AppException("Username \"" + player.Username + "\" is already taken");
 
             byte[] passwordHash, passwordSalt;
@@ -57,14 +58,22 @@ namespace Spaceman.Service.Services
             player.PasswordHash = passwordHash;
             player.PasswordSalt = passwordSalt;
 
-            _db.PlayerCollection.InsertOne(player);
+            await _db.PlayerCollection.InsertOneAsync(player);
             return player;
         }
 
-        public bool CheckIfUsernameExists(string username)
+        public Task<Player> Update(Player player)
+        {
+            FilterDefinition<Player> filter = Builders<Player>.Filter.Eq(p => p.Id, player.Id);
+            return _db.PlayerCollection.ReplaceOneAsync(filter, player)
+                .ContinueWith(r => player);
+        }
+
+        public Task<bool> CheckIfUsernameExists(string username)
         {
             FilterDefinition<Player> filter = Builders<Player>.Filter.Eq(p => p.Username, username);
-            return _db.PlayerCollection.CountDocuments(filter) > 0;
+            return _db.PlayerCollection.CountDocumentsAsync(filter)
+                .ContinueWith(r => r.Result > 0);
         }
 
         public async Task<Player> GetByUsername(string username)
