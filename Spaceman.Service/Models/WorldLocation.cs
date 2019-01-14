@@ -4,12 +4,12 @@ namespace Spaceman.Service.Models
 {
     public class WorldLocation
     {
-        public Guid SpaceBody { get; set; }
+        public Guid SpaceBodyId { get; set; }
         public int? OrbitHeight { get; set; }
 
         public WorldLocation()
         {
-            SpaceBody = Guid.Empty;
+            SpaceBodyId = Guid.Empty;
         }
     }
 

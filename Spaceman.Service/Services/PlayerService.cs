@@ -14,9 +14,7 @@ namespace Spaceman.Service.Services
 
         private readonly MongoProvider _db;
 
-        public PlayerService(
-            MongoProvider db
-            )
+        public PlayerService( MongoProvider db )
         {
             _db = db;
         }
@@ -24,7 +22,10 @@ namespace Spaceman.Service.Services
         public async Task<Player> Authenticate(string username, string password)
         {
             if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+            {
                 return null;
+            }
+
             Player player = await GetByUsername(username);
 
             // check if username exists

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Spaceman.Service.Services
 {
-    public class LocationService
+    public class LocationService : ILocationService
     {
         private MongoProvider _db;
 

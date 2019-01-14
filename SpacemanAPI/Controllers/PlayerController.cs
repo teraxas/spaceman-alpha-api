@@ -51,7 +51,7 @@ namespace Spaceman.Controllers
         [AllowAnonymous]
         public async Task<PlayerDTO> Create([FromBody] PlayerCreateDTO value)
         {
-            var player = Mapper.Map<Player>(value);
+            var player = _mapper.Map<Player>(value);
             player = await _service.Create(player, value.Password);
             return _mapper.Map<PlayerDTO>(player);
         }

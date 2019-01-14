@@ -20,5 +20,10 @@
             Adds Password property to PlayerDTO
             </summary>
         </member>
+        <member name="T:Spaceman.Service.Models.PlayerType">
+            <summary>
+            Type of player
+            </summary>
+        </member>
     </members>
 </doc>

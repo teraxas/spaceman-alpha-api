@@ -24,11 +24,11 @@ namespace Spaceman
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            MapperConfiguration = ConfigureMapper();
         }
 
         public IConfiguration Configuration { get; }
         public MapperConfiguration MapperConfiguration { get; }
+        public Mapper Mapper { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -71,12 +71,13 @@ namespace Spaceman
                 });
             });
 
+            services.AddAutoMapper();
             services.Configure<Options>(Configuration.GetSection("Spaceman"));
             services.Configure<Service.Options>(Configuration.GetSection("SpacemanService"));
-            services.AddSingleton<IMapper>(new Mapper(MapperConfiguration));
 
             services.AddSingleton<MongoProvider>();
             services.AddSingleton<IPlayerService, PlayerService>();
+            services.AddSingleton<ILocationService, LocationService>();
 
         }
 
@@ -89,11 +90,11 @@ namespace Spaceman
             }
 
             // global cors policy
-            app.UseCors(x => x
-                .AllowAnyOrigin()
-                .AllowAnyMethod()
-                .AllowAnyHeader()
-                .AllowCredentials());
+            //app.UseCors(x => x
+            //    .AllowAnyOrigin()
+            //    .AllowAnyMethod()
+            //    .AllowAnyHeader()
+            //    .AllowCredentials());
 
             app.UseAuthentication();
 
@@ -104,13 +105,6 @@ namespace Spaceman
             });
 
             app.UseMvc();
-        }
-
-        private MapperConfiguration ConfigureMapper()
-        {
-            return new MapperConfiguration(cfg => {
-                cfg.AddProfile<Service.MapperProfile>();
-            });
         }
 
     }
