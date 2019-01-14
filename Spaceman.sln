@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spaceman.Api", "SpacemanAPI\Spaceman.Api.csproj", "{753D716A-F7FB-484F-AA34-944DA5E6FEA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Api", "SpacemanAPI\Spaceman.Api.csproj", "{753D716A-F7FB-484F-AA34-944DA5E6FEA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spaceman.Service", "Spaceman.Service\Spaceman.Service.csproj", "{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Service", "Spaceman.Service\Spaceman.Service.csproj", "{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spaceman.Loader", "Spaceman.Loader\Spaceman.Loader.csproj", "{C5007AF6-4ECB-4435-9F22-6985B8006365}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
