@@ -15,6 +15,20 @@ namespace Spaceman.Service.Utilities
         public IMongoClient Client { get; }
         public IMongoDatabase Database { get; }
 
+        public MongoProvider(IOptions<Options> options)
+        {
+            Options = options.Value;
+            Client = new MongoClient(Options.ConnectionString);
+            Database = Client.GetDatabase(Options.DBName);
+        }
+
+        public MongoProvider(Options options)
+        {
+            Options = options;
+            Client = new MongoClient(Options.ConnectionString);
+            Database = Client.GetDatabase(Options.DBName);
+        }
+
         public IMongoCollection<Player> PlayerCollection
         {
             get
@@ -56,13 +70,6 @@ namespace Spaceman.Service.Utilities
                     IsUpsert = true
                 };
             }
-        }
-
-        public MongoProvider(IOptions<Options> options)
-        {
-            Options = options.Value;
-            Client = new MongoClient(Options.ConnectionString);
-            Database = Client.GetDatabase(Options.DBName);
         }
 
     }

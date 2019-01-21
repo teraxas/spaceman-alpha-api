@@ -52,8 +52,7 @@ namespace Spaceman.Service.Services
             if (await CheckIfUsernameExists(player.Username))
                 throw new AppException("Username \"" + player.Username + "\" is already taken");
 
-            byte[] passwordHash, passwordSalt;
-            CreatePasswordHash(password, out passwordHash, out passwordSalt);
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
 
             player.Id = Guid.NewGuid();
             player.PasswordHash = passwordHash;
