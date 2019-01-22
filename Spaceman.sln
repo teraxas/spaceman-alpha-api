@@ -7,7 +7,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Api", "SpacemanAPI
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Service", "Spaceman.Service\Spaceman.Service.csproj", "{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spaceman.Loader", "Spaceman.Loader\Spaceman.Loader.csproj", "{C5007AF6-4ECB-4435-9F22-6985B8006365}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Loader", "Spaceman.Loader\Spaceman.Loader.csproj", "{C5007AF6-4ECB-4435-9F22-6985B8006365}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B1790FC-718A-45AA-A3BE-CCA41FF53812}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_data", "{6AB846E2-6A68-4392-86B0-44079023CA25}"
+	ProjectSection(SolutionItems) = preProject
+		_initial_data\Player.json = _initial_data\Player.json
+		_initial_data\SolarSystem.json = _initial_data\SolarSystem.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +38,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6AB846E2-6A68-4392-86B0-44079023CA25} = {5B1790FC-718A-45AA-A3BE-CCA41FF53812}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7C253212-8AFA-4422-B074-39BDF659F05F}

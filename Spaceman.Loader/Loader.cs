@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json;
 using Spaceman.Service.Models;
 using Spaceman.Service.Services;
-using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace Spaceman.Loader
 {
@@ -23,33 +23,43 @@ namespace Spaceman.Loader
         {
             if (IsType<Player>(type))
             {
-                ReadFile<Player>(path).ForEach((p) => PlayerService.Update(p));
+                ReadFile<Player>(path).ToList().ForEach(async (p) => await PlayerService.Update(p));
             }
             else if (IsType<SolarSystem>(type))
             {
-                ReadFile<SolarSystem>(path).ForEach((p) => LocationService.StoreSolarSystem(p));
+                ReadFile<SolarSystem>(path).ToList().ForEach(async (p) => await LocationService.StoreSolarSystem(p));
             }
             else if (IsType<SpaceBody>(type))
             {
-                ReadFile<SpaceBody>(path).ForEach((p) => LocationService.StoreSpaceBody(p));
+                ReadFile<SpaceBody>(path).ToList().ForEach(async (p) => await LocationService.StoreSpaceBody(p));
             }
             else if (IsType<NamedLocation>(type))
             {
-                ReadFile<NamedLocation>(path).ForEach((p) => LocationService.StoreNamedLocation(p));
+                ReadFile<NamedLocation>(path).ToList().ForEach(async (p) => await LocationService.StoreNamedLocation(p));
             }
         }
 
         private bool IsType<T>(string type)
         {
-            throw new NotImplementedException();
+            return typeof(T).Name.Equals(type);
         }
-        private List<T> ReadFile<T>(string path)
+
+        private IEnumerable<T> ReadFile<T>(string path)
         {
-            using (StreamReader r = new StreamReader(path))
+            try
             {
-                string json = r.ReadToEnd();
-                List<T> items = JsonConvert.DeserializeObject<List<T>>(json);
-                return items;
+                using (StreamReader r = new StreamReader(path))
+                {
+                    string json = r.ReadToEnd();
+                    IEnumerable<T> items = JsonConvert.DeserializeObject<List<T>>(json);
+                    System.Console.WriteLine("Loaded " + path);
+                    return items;
+                }
+            }
+            catch (FileNotFoundException e)
+            {
+                System.Console.WriteLine(e.Message);
+                return new List<T>();
             }
         }
     }

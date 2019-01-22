@@ -14,17 +14,19 @@ namespace Spaceman.Loader
             var app = new CommandLineApplication();
             app.Name = "spaceman-loader";
             app.HelpOption("-?|-h|--help");
-            var loadType = app.Argument("loadType", "Entity type").IsRequired(true);
-            var loadPath = app.Argument("loadPath", "Path to JSON file to load").IsRequired(true);
+            var loadPath = app.Argument("loadPath", "Folder path with JSON files").IsRequired(true);
             
-            app.OnExecute(() => ImportFile(loadType.Value, loadPath.Value));
-            app.Execute();
+            app.OnExecute(() => ImportFiles(loadPath.Value));
+            app.Execute(args);
         }
 
-        private static int ImportFile(string loadType, string loadPath)
+        private static int ImportFiles(string loadPath)
         {
             var loader = GetLoader();
-            loader.ImportFile(loadType, loadPath);
+            loader.ImportFile("Player", loadPath + "\\Player.json");
+            loader.ImportFile("SolarSystem", loadPath + "\\SolarSystem.json");
+            loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
+            loader.ImportFile("SpaceBody", loadPath + "\\SpaceBody.json");
             return 0;
         }
 

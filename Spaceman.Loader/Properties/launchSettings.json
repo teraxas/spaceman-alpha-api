@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Spaceman.Loader": {
+      "commandName": "Project",
+      "commandLineArgs": "$(SolutionDir)_initial_data"
+    }
+  }
+}

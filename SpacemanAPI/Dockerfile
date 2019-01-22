@@ -1,19 +1,20 @@
-FROM microsoft/aspnetcore:2.0 AS base
+FROM microsoft/dotnet:2.2-aspnetcore-runtime AS base
 WORKDIR /app
 EXPOSE 80
 
-FROM microsoft/aspnetcore-build:2.0 AS build
+FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["SpacemanAPI/SpacemanAPI.csproj", "SpacemanAPI/"]
-RUN dotnet restore "SpacemanAPI/SpacemanAPI.csproj"
+COPY ["SpacemanAPI/Spaceman.Api.csproj", "SpacemanAPI/"]
+COPY ["Spaceman.Service/Spaceman.Service.csproj", "Spaceman.Service/"]
+RUN dotnet restore "SpacemanAPI/Spaceman.Api.csproj"
 COPY . .
 WORKDIR "/src/SpacemanAPI"
-RUN dotnet build "SpacemanAPI.csproj" -c Release -o /app
+RUN dotnet build "Spaceman.Api.csproj" -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "SpacemanAPI.csproj" -c Release -o /app
+RUN dotnet publish "Spaceman.Api.csproj" -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "SpacemanAPI.dll"]
+ENTRYPOINT ["dotnet", "Spaceman.Api.dll"]
