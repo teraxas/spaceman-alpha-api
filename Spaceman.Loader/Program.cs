@@ -23,7 +23,7 @@ namespace Spaceman.Loader
         private static int ImportFiles(string loadPath)
         {
             var loader = GetLoader();
-            loader.ImportFile("Player", loadPath + "\\Player.json");
+            //loader.ImportFile("Player", loadPath + "\\Player.json");
             loader.ImportFile("SolarSystem", loadPath + "\\SolarSystem.json");
             loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
             loader.ImportFile("SpaceBody", loadPath + "\\SpaceBody.json");

@@ -52,7 +52,7 @@ namespace Spaceman.Loader
                 {
                     string json = r.ReadToEnd();
                     IEnumerable<T> items = JsonConvert.DeserializeObject<List<T>>(json);
-                    System.Console.WriteLine("Loaded " + path);
+                    System.Console.WriteLine("Loaded " + path + " ; Count: " + items.Count());
                     return items;
                 }
             }
