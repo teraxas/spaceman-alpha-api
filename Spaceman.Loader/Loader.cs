@@ -21,6 +21,8 @@ namespace Spaceman.Loader
 
         public void ImportFile(string type, string path)
         {
+            System.Console.WriteLine($"Importing: {type} from {path}");
+
             if (IsType<Player>(type))
             {
                 ReadFile<Player>(path).ToList().ForEach(async (p) => await PlayerService.Update(p));
@@ -52,7 +54,7 @@ namespace Spaceman.Loader
                 {
                     string json = r.ReadToEnd();
                     IEnumerable<T> items = JsonConvert.DeserializeObject<List<T>>(json);
-                    System.Console.WriteLine("Loaded " + path + " ; Count: " + items.Count());
+                    System.Console.WriteLine($"Loaded {path} ; Count: {items.Count()}");
                     return items;
                 }
             }
