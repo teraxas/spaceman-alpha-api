@@ -1,6 +1,14 @@
 [
   {
     "Id": "6da9801f-1681-41c9-bfa6-90ee445becde",
-    "Name":  "Sol"
+    "Name": "Sol"
+  },
+  {
+    "Id": "8dcf31de-9920-4c1f-8940-4e7f1b7b0723",
+    "Name": "Habitat-1"
+  },
+  {
+    "Id": "2c0d8f4b-c396-4554-9dc1-163c5838e1ab",
+    "Name": "Habitat-2"
   }
 ]

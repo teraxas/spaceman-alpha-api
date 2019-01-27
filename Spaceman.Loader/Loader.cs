@@ -1,9 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Spaceman.Service.Models;
 using Spaceman.Service.Services;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Spaceman.Loader
 {
@@ -19,26 +21,35 @@ namespace Spaceman.Loader
             LocationService = locationService;
         }
 
-        public void ImportFile(string type, string path)
+        public async Task ImportFile(string type, string path)
         {
             System.Console.WriteLine($"Importing: {type} from {path}");
-
+            Task task;
             if (IsType<Player>(type))
             {
-                ReadFile<Player>(path).ToList().ForEach(async (p) => await PlayerService.Update(p));
+                task = Task.WhenAll(ReadFile<Player>(path).ToList()
+                    .Select((p) => PlayerService.Update(p)));
             }
             else if (IsType<SolarSystem>(type))
             {
-                ReadFile<SolarSystem>(path).ToList().ForEach(async (p) => await LocationService.StoreSolarSystem(p));
+                task = Task.WhenAll(ReadFile<SolarSystem>(path).ToList()
+                    .Select((p) => LocationService.StoreSolarSystem(p)));
             }
             else if (IsType<SpaceBody>(type))
             {
-                ReadFile<SpaceBody>(path).ToList().ForEach(async (p) => await LocationService.StoreSpaceBody(p));
+                task = Task.WhenAll(ReadFile<SpaceBody>(path).ToList()
+                    .Select((p) => LocationService.StoreSpaceBody(p)));
             }
             else if (IsType<NamedLocation>(type))
             {
-                ReadFile<NamedLocation>(path).ToList().ForEach(async (p) => await LocationService.StoreNamedLocation(p));
+                task = Task.WhenAll(ReadFile<NamedLocation>(path).ToList()
+                    .Select((p) => LocationService.StoreNamedLocation(p)));
+            } else
+            {
+                throw new Exception("Illegal import type exception");
             }
+
+            await task;
         }
 
         private bool IsType<T>(string type)

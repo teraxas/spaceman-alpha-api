@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Spaceman.Service;
 using Spaceman.Service.Services;
 using Spaceman.Service.Utilities;
+using System.Threading.Tasks;
 
 namespace Spaceman.Loader
 {
@@ -20,13 +21,13 @@ namespace Spaceman.Loader
             app.Execute(args);
         }
 
-        private static int ImportFiles(string loadPath)
+        private static async Task<int> ImportFiles(string loadPath)
         {
             var loader = GetLoader();
             //loader.ImportFile("Player", loadPath + "\\Player.json");
-            loader.ImportFile("SolarSystem", loadPath + "\\SolarSystem.json");
-            loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
-            loader.ImportFile("SpaceBody", loadPath + "\\SpaceBody.json");
+            await loader.ImportFile("SolarSystem", loadPath + "\\SolarSystem.json");
+            await loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
+            await loader.ImportFile("SpaceBody", loadPath + "\\SpaceBody.json");
             return 0;
         }
 
@@ -43,6 +44,7 @@ namespace Spaceman.Loader
             var playerService = new PlayerService(db);
             var locationService = new LocationService(db);
 
+            System.Console.WriteLine("Loader ready.");
             return new Loader(playerService, locationService);
         }
 

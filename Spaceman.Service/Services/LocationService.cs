@@ -17,7 +17,7 @@ namespace Spaceman.Service.Services
             _db = db;
         }
 
-        public Task<SolarSystem> StoreSolarSystem(SolarSystem solarSystem)
+        public async Task<SolarSystem> StoreSolarSystem(SolarSystem solarSystem)
         {
             if (solarSystem.Id == Guid.Empty)
             {
@@ -25,8 +25,8 @@ namespace Spaceman.Service.Services
             }
 
             // TODO validate
-            return _db.SolarSystemCollection.ReplaceOneAsync(GetIdFilterSolarSystem(solarSystem.Id), solarSystem, _db.UpsertOptions)
-                .ContinueWith(r => solarSystem);
+            var result = await _db.SolarSystemCollection.ReplaceOneAsync(GetIdFilterSolarSystem(solarSystem.Id), solarSystem, _db.UpsertOptions);
+            return solarSystem;
         }
 
         public async Task<SolarSystem> GetSolarSystem(Guid id)
