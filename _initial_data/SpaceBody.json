@@ -1,0 +1,93 @@
+[
+    // Sol
+    {
+        "Id": "918891a7-1db9-4f57-a3fa-c61f999522ae",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Sol",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Mercury",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "b7b495e6-9566-45bf-a79a-e2d3898d9746",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Venus",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "9333d614-be7b-420d-ac36-efdba268505e",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Earth",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "30ac9b28-bda0-44ed-b2dc-a8b28f54c2b3",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "9333d614-be7b-420d-ac36-efdba268505e",
+        "Name": "Moon",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "c44422c1-5eeb-46f0-b525-b35133642e31",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Mars",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "988eb19f-6815-47c9-8a3d-f8e610622699",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Jupyter",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "ddba05a0-65b3-4168-b874-5025a82b85a5",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Saturn",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "05457202-199e-4253-a1b1-6447e7662f0b",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Uranus",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    },
+    {
+        "Id": "11805665-108c-4dd5-afdc-db3fe69a5134",
+        "SolarSystemId": "6da9801f-1681-41c9-bfa6-90ee445becde",
+        "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
+        "Name": "Neptune",
+        "Size": "0",
+        "OrbitHeight": "0",
+        "MaxStableOrbit": "0"
+    }
+]

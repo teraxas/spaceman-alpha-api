@@ -26,8 +26,8 @@ namespace Spaceman.Loader
             var loader = GetLoader();
             //loader.ImportFile("Player", loadPath + "\\Player.json");
             await loader.ImportFile("SolarSystem", loadPath + "\\SolarSystem.json");
-            await loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
             await loader.ImportFile("SpaceBody", loadPath + "\\SpaceBody.json");
+            await loader.ImportFile("NamedLocation", loadPath + "\\NamedLocation.json");
             return 0;
         }
 

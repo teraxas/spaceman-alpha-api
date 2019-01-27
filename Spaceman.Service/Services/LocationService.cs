@@ -35,7 +35,7 @@ namespace Spaceman.Service.Services
                 .FirstOrDefault();
         }
 
-        public Task<SpaceBody> StoreSpaceBody(SpaceBody spaceBody)
+        public async Task<SpaceBody> StoreSpaceBody(SpaceBody spaceBody)
         {
             if (spaceBody.Id == Guid.Empty)
             {
@@ -43,8 +43,8 @@ namespace Spaceman.Service.Services
             }
 
             // TODO validate
-            return _db.SpaceBodyCollection.ReplaceOneAsync(GetIdFilterSpaceBody(spaceBody.Id), spaceBody, _db.UpsertOptions)
-                .ContinueWith(r => spaceBody);
+            var result = await _db.SpaceBodyCollection.ReplaceOneAsync(GetIdFilterSpaceBody(spaceBody.Id), spaceBody, _db.UpsertOptions);
+            return spaceBody;
         }
 
         public async Task<SpaceBody> GetSpaceBody(Guid id)
@@ -53,7 +53,7 @@ namespace Spaceman.Service.Services
                 .FirstOrDefault();
         }
 
-        public Task<NamedLocation> StoreNamedLocation(NamedLocation spaceBody)
+        public async Task<NamedLocation> StoreNamedLocation(NamedLocation spaceBody)
         {
             if (spaceBody.Id == Guid.Empty)
             {
@@ -61,8 +61,8 @@ namespace Spaceman.Service.Services
             }
 
             // TODO validate
-            return _db.NamedLocationCollection.ReplaceOneAsync(GetIdNamedLocation(spaceBody.Id), spaceBody, _db.UpsertOptions)
-                .ContinueWith(r => spaceBody);
+            var result = await _db.NamedLocationCollection.ReplaceOneAsync(GetIdNamedLocation(spaceBody.Id), spaceBody, _db.UpsertOptions);
+            return spaceBody;
         }
 
         public async Task<NamedLocation> GetNamedLocation(Guid id)

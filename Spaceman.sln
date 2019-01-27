@@ -14,6 +14,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_data", "{6AB846E2-6A68-4392-86B0-44079023CA25}"
 	ProjectSection(SolutionItems) = preProject
 		_initial_data\SolarSystem.json = _initial_data\SolarSystem.json
+		_initial_data\SpaceBody.json = _initial_data\SpaceBody.json
 	EndProjectSection
 EndProject
 Global
