@@ -43,6 +43,12 @@ namespace Spaceman.Controllers
             return _locationService.GetSolarSystem(id);
         }
 
+        [HttpGet("solarSystem/all")]
+        public Task<IEnumerable<SolarSystem>> GetAllSolarSystems()
+        {
+            return _locationService.GetAllSolarSystems();
+        }
+
         [HttpGet("spaceBody")]
         public Task<SpaceBody> GetSpaceBody(Guid id)
         {

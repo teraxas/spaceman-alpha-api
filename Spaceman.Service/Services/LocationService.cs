@@ -35,6 +35,11 @@ namespace Spaceman.Service.Services
                 .FirstOrDefault();
         }
 
+        public async Task<IEnumerable<SolarSystem>> GetAllSolarSystems()
+        {
+            return await _db.SolarSystemCollection.Find(Builders<SolarSystem>.Filter.Empty).ToListAsync();
+        }
+
         public async Task<SpaceBody> StoreSpaceBody(SpaceBody spaceBody)
         {
             if (spaceBody.Id == Guid.Empty)
