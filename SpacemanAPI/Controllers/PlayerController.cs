@@ -87,7 +87,7 @@ namespace Spaceman.Controllers
             //  return basic user info (without password) and token to store client side
             return new PlayerAuthenticated {
                 Player = _mapper.Map<PlayerDTO>(player),
-                Token = tokenString
+                Token = $"Bearer {tokenString}"
             };
         }
     }
