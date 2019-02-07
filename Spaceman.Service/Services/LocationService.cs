@@ -3,7 +3,6 @@ using Spaceman.Service.Models;
 using Spaceman.Service.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Spaceman.Service.Services
@@ -12,7 +11,7 @@ namespace Spaceman.Service.Services
     {
         private MongoProvider _db;
 
-        public LocationService( MongoProvider db )
+        public LocationService(MongoProvider db)
         {
             _db = db;
         }
@@ -56,6 +55,20 @@ namespace Spaceman.Service.Services
         {
             return (await _db.SpaceBodyCollection.FindAsync<SpaceBody>(GetIdFilterSpaceBody(id)))
                 .FirstOrDefault();
+        }
+
+        public async Task<IEnumerable<SpaceBody>> GetSpaceBodiesBySolarSystem(Guid solarSystemId)
+        {
+            return (await _db.SpaceBodyCollection.FindAsync<SpaceBody>(
+                Builders<SpaceBody>.Filter.Eq(p => p.SolarSystemId, solarSystemId)
+                )).ToEnumerable();
+        }
+
+        public async Task<IEnumerable<WorldObject>> GetWorldObjectsBySpacebody(Guid spaceBodyId)
+        {
+            return (await _db.WorldObjectCollection.FindAsync<WorldObject>(
+                Builders<WorldObject>.Filter.Eq(p => p.Location.SpaceBodyId, spaceBodyId)
+                )).ToEnumerable();
         }
 
         public async Task<NamedLocation> StoreNamedLocation(NamedLocation namedLocation)

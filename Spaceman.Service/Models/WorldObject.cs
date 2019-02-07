@@ -11,7 +11,7 @@ namespace Spaceman.Service.Models
         public string Name { get; set; }
         public string Description { get; set; }
         public WorldLocation Location { get; set; }
-        public Dictionary<WorldObjectProperty, int> Properties { get; set; }
+        public Dictionary<string, int> Properties { get; set; }
 
         public WorldObject()
         {
@@ -20,14 +20,15 @@ namespace Spaceman.Service.Models
 
     }
 
-    public enum WorldObjectProperty
-    {
-        Speed,
-        WarpPower,
-        ShieldHP,
-        HullHP,
-        Sectors,
-        ShipSlots,
-    }
+    // TODO : Create validator instead
+    //public enum WorldObjectProperty
+    //{
+    //    Speed,
+    //    WarpPower,
+    //    ShieldHP,
+    //    HullHP,
+    //    Sectors,
+    //    ShipSlots,
+    //}
 
 }

@@ -4,7 +4,6 @@ using Spaceman.Service.Models;
 using Spaceman.Service.Services;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Spaceman.Controllers
@@ -20,27 +19,16 @@ namespace Spaceman.Controllers
             _locationService = locationService;
         }
 
-        [HttpPost("solarSystem")]
-        public Task<SolarSystem> StoreSolarSystem([FromBody] SolarSystem solarSystem) {
-            return _locationService.StoreSolarSystem(solarSystem);
-        }
-
-        [HttpPost("spaceBody")]
-        public Task<SpaceBody> StoreSpaceBody([FromBody] SpaceBody spaceBody)
-        {
-            return _locationService.StoreSpaceBody(spaceBody);
-        }
-
-        [HttpPost("namedLocation")]
-        public Task<NamedLocation> StoreNamedLocation([FromBody] NamedLocation namedLocation)
-        {
-            return _locationService.StoreNamedLocation(namedLocation);
-        }
-
-        [HttpGet("solarSystem")]
+        [HttpGet("solarSystem/{id}")]
         public Task<SolarSystem> GetSolarSystem(Guid id)
         {
             return _locationService.GetSolarSystem(id);
+        }
+
+        [HttpGet("solarSystem/{id}/SpaceBodies")]
+        public Task<IEnumerable<SpaceBody>> GetSolarSystemSpaceBodies(Guid id)
+        {
+            return _locationService.GetSpaceBodiesBySolarSystem(id);
         }
 
         [HttpGet("solarSystem/all")]
@@ -49,16 +37,22 @@ namespace Spaceman.Controllers
             return _locationService.GetAllSolarSystems();
         }
 
-        [HttpGet("spaceBody")]
+        [HttpGet("spaceBody/{id}")]
         public Task<SpaceBody> GetSpaceBody(Guid id)
         {
             return _locationService.GetSpaceBody(id);
         }
 
-        [HttpGet("namedLocation")]
-        public Task<NamedLocation> GetNamedLocation(Guid id)
+        [HttpGet("spaceBody/{id}/worldObjects")]
+        public Task<IEnumerable<WorldObject>> GetSpaceBodyWorldObjects(Guid id)
         {
-            return _locationService.GetNamedLocation(id);
+            return _locationService.GetWorldObjectsBySpacebody(id);
+        }
+
+        [HttpGet("worldObject/{id}")]
+        public Task<WorldObject> GetWorldObject(Guid id)
+        {
+            return _locationService.GetWorldObject(id);
         }
     }
 }
