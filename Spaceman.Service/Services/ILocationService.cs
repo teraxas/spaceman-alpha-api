@@ -14,5 +14,7 @@ namespace Spaceman.Service.Services
         Task<NamedLocation> StoreNamedLocation(NamedLocation spaceBody);
         Task<SolarSystem> StoreSolarSystem(SolarSystem solarSystem);
         Task<SpaceBody> StoreSpaceBody(SpaceBody spaceBody);
+        Task<WorldObject> StoreWorldObject(WorldObject worldObject);
+        Task<WorldObject> GetWorldObject(Guid id);
     }
 }

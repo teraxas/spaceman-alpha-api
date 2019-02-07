@@ -10,6 +10,7 @@ namespace Spaceman.Service.Utilities
         private const string DbCollectionNameSolarSystem = "SolarSystem";
         private const string DbCollectionNameSpaceBody = "SpaceBody";
         private const string DbCollectionNameNamedLocation = "NamedLocation";
+        private const string DbCollectionNameWorldObject = "WorldObject";
 
         internal Options Options { get; }
         public IMongoClient Client { get; }
@@ -50,6 +51,14 @@ namespace Spaceman.Service.Utilities
             get
             {
                 return Database.GetCollection<SpaceBody>(DbCollectionNameSpaceBody);
+            }
+        }
+
+        public IMongoCollection<WorldObject> WorldObjectCollection
+        {
+            get
+            {
+                return Database.GetCollection<WorldObject>(DbCollectionNameWorldObject);
             }
         }
 

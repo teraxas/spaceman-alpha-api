@@ -44,7 +44,13 @@ namespace Spaceman.Loader
             {
                 task = Task.WhenAll(ReadFile<NamedLocation>(path).ToList()
                     .Select((p) => LocationService.StoreNamedLocation(p)));
-            } else
+            }
+            else if (IsType<WorldObject>(type))
+            {
+                task = Task.WhenAll(ReadFile<WorldObject>(path).ToList()
+                    .Select((p) => LocationService.StoreWorldObject(p)));
+            }
+            else
             {
                 throw new Exception("Illegal import type exception");
             }

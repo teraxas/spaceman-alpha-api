@@ -15,7 +15,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Mercury",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "1",
         "MaxStableOrbit": "0"
     },
     {
@@ -24,7 +24,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Venus",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "2",
         "MaxStableOrbit": "0"
     },
     {
@@ -33,7 +33,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Earth",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "3",
         "MaxStableOrbit": "0"
     },
     {
@@ -42,7 +42,7 @@
         "BarycenterId": "9333d614-be7b-420d-ac36-efdba268505e",
         "Name": "Moon",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "4",
         "MaxStableOrbit": "0"
     },
     {
@@ -51,7 +51,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Mars",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "5",
         "MaxStableOrbit": "0"
     },
     {
@@ -60,7 +60,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Jupyter",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "6",
         "MaxStableOrbit": "0"
     },
     {
@@ -69,7 +69,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Saturn",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "7",
         "MaxStableOrbit": "0"
     },
     {
@@ -78,7 +78,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Uranus",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "8",
         "MaxStableOrbit": "0"
     },
     {
@@ -87,7 +87,7 @@
         "BarycenterId": "2324ffd6-7f24-4d19-becc-26696acaaf20",
         "Name": "Neptune",
         "Size": "0",
-        "OrbitHeight": "0",
+        "OrbitHeight": "9",
         "MaxStableOrbit": "0"
     }
 ]

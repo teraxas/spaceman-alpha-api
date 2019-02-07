@@ -1,0 +1,49 @@
+[
+  {
+    "Id": "e2061eff-7471-4439-b152-3550c8776613",
+    "Name": "ISS",
+    "Type": "STATION_SCIENCE",
+    "Description": "International Space Station - it's amazing, that this thing is still flying. Currently turned into a museum.",
+    "Location": {
+      "SpaceBodyId": "9333d614-be7b-420d-ac36-efdba268505e",
+      "OrbitHeight": "1"
+    },
+    "Properties": {
+      "ShipSlots": 4,
+      "HullHP": 100,
+      "Sectors": 3
+    }
+  },
+  {
+    "Id": "abe11cc2-79cf-4670-a2d5-6c78c53da56b",
+    "Name": "IMSS",
+    "Type": "STATION_SURFACE_SCIENCE",
+    "Description": "International Moon Surface Station - a joint humanity's effort that opened up manned deep space exploration - for better or worse.",
+    "Location": {
+      "SpaceBodyId": "30ac9b28-bda0-44ed-b2dc-a8b28f54c2b3",
+      "OrbitHeight": "0"
+    },
+    "Properties": {
+      "ShipSlots": 4,
+      "HullHP": 1000,
+      "ShieldHP": 1000,
+      "Sectors": 3
+    }
+  },
+  {
+    "Id": "abe11cc2-79cf-4670-a2d5-6c78c53da56b",
+    "Name": "IMS",
+    "Type": "STATION_SCIENCE",
+    "Description": "International Moon Station - a short stop before landing to IMSS.",
+    "Location": {
+      "SpaceBodyId": "30ac9b28-bda0-44ed-b2dc-a8b28f54c2b3",
+      "OrbitHeight": "1"
+    },
+    "Properties": {
+      "ShipSlots": 4,
+      "HullHP": 1000,
+      "ShieldHP": 1000,
+      "Sectors": 3
+    }
+  }
+]

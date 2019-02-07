@@ -58,21 +58,39 @@ namespace Spaceman.Service.Services
                 .FirstOrDefault();
         }
 
-        public async Task<NamedLocation> StoreNamedLocation(NamedLocation spaceBody)
+        public async Task<NamedLocation> StoreNamedLocation(NamedLocation namedLocation)
         {
-            if (spaceBody.Id == Guid.Empty)
+            if (namedLocation.Id == Guid.Empty)
             {
-                spaceBody.Id = Guid.NewGuid();
+                namedLocation.Id = Guid.NewGuid();
             }
 
             // TODO validate
-            var result = await _db.NamedLocationCollection.ReplaceOneAsync(GetIdNamedLocation(spaceBody.Id), spaceBody, _db.UpsertOptions);
-            return spaceBody;
+            var result = await _db.NamedLocationCollection.ReplaceOneAsync(GetIdFilterNamedLocation(namedLocation.Id), namedLocation, _db.UpsertOptions);
+            return namedLocation;
         }
 
         public async Task<NamedLocation> GetNamedLocation(Guid id)
         {
-            return (await _db.SpaceBodyCollection.FindAsync<NamedLocation>(GetIdFilterSpaceBody(id)))
+            return (await _db.NamedLocationCollection.FindAsync<NamedLocation>(GetIdFilterNamedLocation(id)))
+                .FirstOrDefault();
+        }
+
+        public async Task<WorldObject> StoreWorldObject(WorldObject worldObject)
+        {
+            if (worldObject.Id == Guid.Empty)
+            {
+                worldObject.Id = Guid.NewGuid();
+            }
+
+            // TODO validate
+            var result = await _db.WorldObjectCollection.ReplaceOneAsync(GetIdFilterWorldObject(worldObject.Id), worldObject, _db.UpsertOptions);
+            return worldObject;
+        }
+
+        public async Task<WorldObject> GetWorldObject(Guid id)
+        {
+            return (await _db.WorldObjectCollection.FindAsync<WorldObject>(GetIdFilterWorldObject(id)))
                 .FirstOrDefault();
         }
 
@@ -86,9 +104,14 @@ namespace Spaceman.Service.Services
             return Builders<SpaceBody>.Filter.Eq(p => p.Id, id);
         }
 
-        private static FilterDefinition<NamedLocation> GetIdNamedLocation(Guid id)
+        private static FilterDefinition<NamedLocation> GetIdFilterNamedLocation(Guid id)
         {
             return Builders<NamedLocation>.Filter.Eq(p => p.Id, id);
+        }
+
+        private static FilterDefinition<WorldObject> GetIdFilterWorldObject(Guid id)
+        {
+            return Builders<WorldObject>.Filter.Eq(p => p.Id, id);
         }
     }
 }
