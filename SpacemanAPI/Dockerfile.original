@@ -15,6 +15,7 @@ FROM build AS publish
 RUN dotnet publish "Spaceman.Api.csproj" -c Release -o /app
 
 FROM base AS final
+ENV ASPNETCORE_URLS http://*:5000
 WORKDIR /app
 COPY --from=publish /app .
 ENTRYPOINT ["dotnet", "Spaceman.Api.dll"]
