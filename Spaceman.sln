@@ -10,6 +10,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Loader", "Spaceman.Loader\Spaceman.Loader.csproj", "{C5007AF6-4ECB-4435-9F22-6985B8006365}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B1790FC-718A-45AA-A3BE-CCA41FF53812}"
+	ProjectSection(SolutionItems) = preProject
+		Dockerfile = Dockerfile
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_data", "{6AB846E2-6A68-4392-86B0-44079023CA25}"
 	ProjectSection(SolutionItems) = preProject
