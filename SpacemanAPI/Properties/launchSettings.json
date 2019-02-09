@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:9430/",
+      "applicationUrl": "http://localhost:9430",
       "sslPort": 0
     }
   },
@@ -23,16 +23,12 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:9429/"
+      "applicationUrl": "http://localhost:9429"
     },
     "Docker": {
       "commandName": "Docker",
       "launchBrowser": true,
-      "launchUrl": "{Scheme}://localhost:{ServicePort}/api/values",
-      "environmentVariables": {
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONENABLED": "true",
-        "ASPNETCORE_HOSTINGSTARTUP__KEYVAULT__CONFIGURATIONVAULT": "https://spaceman-api-0-kv.vault.azure.net"
-      }
+      "launchUrl": "{Scheme}://localhost:{ServicePort}/swagger"
     }
   }
 }

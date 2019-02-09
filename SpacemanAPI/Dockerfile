@@ -4,15 +4,15 @@ EXPOSE 80
 
 FROM microsoft/dotnet:2.2-sdk AS build
 WORKDIR /src
-COPY ["SpacemanAPI/Spaceman.Api.csproj", "SpacemanAPI/"]
-COPY ["Spaceman.Service/Spaceman.Service.csproj", "Spaceman.Service/"]
-RUN dotnet restore "SpacemanAPI/Spaceman.Api.csproj"
+COPY SpacemanAPI/Spaceman.Api.csproj SpacemanAPI/
+COPY Spaceman.Service/Spaceman.Service.csproj Spaceman.Service/
+RUN dotnet restore SpacemanAPI/Spaceman.Api.csproj
 COPY . .
-WORKDIR "/src/SpacemanAPI"
-RUN dotnet build "Spaceman.Api.csproj" -c Release -o /app
+WORKDIR /src/SpacemanAPI
+RUN dotnet build Spaceman.Api.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish "Spaceman.Api.csproj" -c Release -o /app
+RUN dotnet publish Spaceman.Api.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
