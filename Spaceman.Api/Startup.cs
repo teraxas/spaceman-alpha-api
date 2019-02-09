@@ -12,6 +12,7 @@ using AutoMapper;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Spaceman
 {
@@ -29,7 +30,7 @@ namespace Spaceman
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var appSettings = Configuration.GetSection("Spaceman").Get<Options>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);

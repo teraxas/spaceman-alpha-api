@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Api", "SpacemanAPI\Spaceman.Api.csproj", "{753D716A-F7FB-484F-AA34-944DA5E6FEA5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Service", "Spaceman.Service\Spaceman.Service.csproj", "{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Loader", "Spaceman.Loader\Spaceman.Loader.csproj", "{C5007AF6-4ECB-4435-9F22-6985B8006365}"
@@ -22,16 +20,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_d
 		_initial_data\WorldObject.json = _initial_data\WorldObject.json
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Api", "Spaceman.Api\Spaceman.Api.csproj", "{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{753D716A-F7FB-484F-AA34-944DA5E6FEA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{753D716A-F7FB-484F-AA34-944DA5E6FEA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{753D716A-F7FB-484F-AA34-944DA5E6FEA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{753D716A-F7FB-484F-AA34-944DA5E6FEA5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{11FF8062-3ACD-4C60-B8E7-3AA42DEA1432}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -40,6 +36,10 @@ Global
 		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5007AF6-4ECB-4435-9F22-6985B8006365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
