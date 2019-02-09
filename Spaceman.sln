@@ -10,7 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{5B1790FC-718A-45AA-A3BE-CCA41FF53812}"
 	ProjectSection(SolutionItems) = preProject
 		.dockerignore = .dockerignore
-		Dockerfile = Dockerfile
+		Spaceman.Api\Dockerfile = Spaceman.Api\Dockerfile
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_data", "{6AB846E2-6A68-4392-86B0-44079023CA25}"
@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_initial_data", "_initial_d
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spaceman.Api", "Spaceman.Api\Spaceman.Api.csproj", "{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spaceman.Api.N", "Spaceman.Api.N\Spaceman.Api.N.csproj", "{D5E66AE6-330A-4DB1-AF8D-C2AADA475311}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -40,6 +42,10 @@ Global
 		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA94636F-83ED-4B1B-BD19-CE2D77A4B375}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5E66AE6-330A-4DB1-AF8D-C2AADA475311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5E66AE6-330A-4DB1-AF8D-C2AADA475311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5E66AE6-330A-4DB1-AF8D-C2AADA475311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5E66AE6-330A-4DB1-AF8D-C2AADA475311}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
