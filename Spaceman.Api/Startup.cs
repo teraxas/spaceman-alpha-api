@@ -94,6 +94,8 @@ namespace Spaceman
             //    .AllowCredentials());
 
             app.UseAuthentication();
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
 
             app.UseSwagger();
             app.UseSwaggerUI(c =>
