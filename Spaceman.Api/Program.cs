@@ -20,6 +20,10 @@ namespace Spaceman
         public static IWebHost BuildWebHost(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseStartup<Startup>()
+                .ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddEnvironmentVariables("ASPNETCORE");
+                })
                 .Build();
     }
 }
