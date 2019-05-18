@@ -22,7 +22,7 @@ namespace Spaceman
                 .UseStartup<Startup>()
                 .ConfigureAppConfiguration(builder =>
                 {
-                    builder.AddEnvironmentVariables("ASPNETCORE");
+                    builder.AddEnvironmentVariables();
                 })
                 .Build();
     }
