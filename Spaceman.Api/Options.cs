@@ -8,6 +8,7 @@ namespace Spaceman
     public class Options
     {
         public string Secret { get; set; }
+        public string MainUrl { get; set; } = "";
 
     }
 }
