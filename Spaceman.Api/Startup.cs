@@ -88,7 +88,7 @@ namespace Spaceman
 
             // global cors policy
             app.UseCors(x => x
-                .WithOrigins("localhost:4200")
+                .WithOrigins("localhost:4200", Configuration.Get<Options>().MainUrl)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
