@@ -91,7 +91,7 @@ namespace Spaceman
                 .WithOrigins("localhost:4200", Configuration.Get<Options>().MainUrl)
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                );
 
             app.UseAuthentication();
             app.UseDefaultFiles();
