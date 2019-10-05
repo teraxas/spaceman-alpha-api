@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Spaceman
 {
-    public class Options
+    public class SpacemanOptions
     {
         public string Secret { get; set; }
-        public string MainUrl { get; set; } = "";
+        public Uri MainUrl { get; set; } = new Uri("");
 
     }
 }

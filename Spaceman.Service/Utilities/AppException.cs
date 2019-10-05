@@ -17,5 +17,9 @@ namespace Spaceman.Service.Utilities
             : base(String.Format(CultureInfo.CurrentCulture, message, args))
         {
         }
+
+        public AppException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

@@ -12,18 +12,18 @@ namespace Spaceman.Service.Utilities
         private const string DbCollectionNameNamedLocation = "NamedLocation";
         private const string DbCollectionNameWorldObject = "WorldObject";
 
-        internal Options Options { get; }
+        internal SpacemanServiceOptions Options { get; }
         public IMongoClient Client { get; }
         public IMongoDatabase Database { get; }
 
-        public MongoProvider(IOptions<Options> options)
+        public MongoProvider(IOptions<SpacemanServiceOptions> options)
         {
             Options = options.Value;
             Client = new MongoClient(Options.ConnectionString);
             Database = Client.GetDatabase(Options.DBName);
         }
 
-        public MongoProvider(Options options)
+        public MongoProvider(SpacemanServiceOptions options)
         {
             Options = options;
             Client = new MongoClient(Options.ConnectionString);

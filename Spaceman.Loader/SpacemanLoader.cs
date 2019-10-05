@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace Spaceman.Loader
 {
-    public class Loader
+    public class SpacemanLoader
     {
 
         private IPlayerService PlayerService { get; set; }
         private ILocationService LocationService { get; set; }
 
-        public Loader(IPlayerService playerService, ILocationService locationService)
+        public SpacemanLoader(IPlayerService playerService, ILocationService locationService)
         {
             PlayerService = playerService;
             LocationService = locationService;
@@ -60,7 +60,7 @@ namespace Spaceman.Loader
 
         private bool IsType<T>(string type)
         {
-            return typeof(T).Name.Equals(type);
+            return string.Equals(typeof(T).Name, type, comparisonType: StringComparison.InvariantCulture);
         }
 
         private IEnumerable<T> ReadFile<T>(string path)

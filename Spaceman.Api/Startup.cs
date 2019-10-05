@@ -32,7 +32,7 @@ namespace Spaceman
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var appSettings = Configuration.GetSection("Spaceman").Get<Options>();
+            var appSettings = Configuration.GetSection("Spaceman").Get<SpacemanOptions>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
@@ -57,7 +57,7 @@ namespace Spaceman
                 c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
                 c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
                 {
-                    { "Bearer", new string[]{ } }
+                    { "Bearer", Array.Empty<string>() }
                 });
                 c.AddSecurityDefinition("Bearer", new ApiKeyScheme
                 {
@@ -69,8 +69,8 @@ namespace Spaceman
             });
 
             services.AddAutoMapper();
-            services.Configure<Options>(Configuration.GetSection("Spaceman"));
-            services.Configure<Service.Options>(Configuration.GetSection("SpacemanService"));
+            services.Configure<SpacemanOptions>(Configuration.GetSection("Spaceman"));
+            services.Configure<Service.SpacemanServiceOptions>(Configuration.GetSection("SpacemanService"));
 
             services.AddSingleton<MongoProvider>();
             services.AddSingleton<IPlayerService, PlayerService>();

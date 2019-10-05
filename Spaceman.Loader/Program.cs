@@ -12,13 +12,15 @@ namespace Spaceman.Loader
     {
         static void Main(string[] args)
         {
-            var app = new CommandLineApplication();
-            app.Name = "spaceman-loader";
-            app.HelpOption("-?|-h|--help");
-            var loadPath = app.Argument("loadPath", "Folder path with JSON files").IsRequired(true);
-            
-            app.OnExecute(() => ImportFiles(loadPath.Value));
-            app.Execute(args);
+            using (var app = new CommandLineApplication())
+            {
+                app.Name = "spaceman-loader";
+                app.HelpOption("-?|-h|--help");
+                var loadPath = app.Argument("loadPath", "Folder path with JSON files").IsRequired(true);
+
+                app.OnExecute(() => ImportFiles(loadPath.Value));
+                app.Execute(args);
+            }
         }
 
         private static async Task<int> ImportFiles(string loadPath)
@@ -32,13 +34,13 @@ namespace Spaceman.Loader
             return 0;
         }
 
-        private static Loader GetLoader()
+        private static SpacemanLoader GetLoader()
         {
             var config = new ConfigurationBuilder()
                 .AddJsonFile("LoadConfig.json")
                 .AddUserSecrets<Program>()
                 .Build();
-            var serviceConfig = new Options();
+            var serviceConfig = new SpacemanServiceOptions();
             config.Bind("SpacemanService", serviceConfig);
 
             var db = new MongoProvider(serviceConfig);
@@ -46,9 +48,9 @@ namespace Spaceman.Loader
             var locationService = new LocationService(db);
 
             System.Console.WriteLine("Loader ready.");
-            return new Loader(playerService, locationService);
+            return new SpacemanLoader(playerService, locationService);
         }
 
-        
+
     }
 }

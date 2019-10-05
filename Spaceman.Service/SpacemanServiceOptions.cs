@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Spaceman.Service
 {
-    public class Options
+    public class SpacemanServiceOptions
     {
         public string ConnectionString { get; set; }
         public string DBName { get; set; }

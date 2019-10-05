@@ -21,9 +21,9 @@ namespace Spaceman.Controllers
     {
         private readonly IPlayerService _service;
         private readonly IMapper _mapper;
-        private readonly Options _options;
+        private readonly SpacemanOptions _options;
 
-        public PlayerController(IPlayerService service, IOptions<Spaceman.Options> options, IMapper mapper)
+        public PlayerController(IPlayerService service, IOptions<Spaceman.SpacemanOptions> options, IMapper mapper)
         {
             _service = service;
             _mapper = mapper;
@@ -38,7 +38,7 @@ namespace Spaceman.Controllers
         public async Task<PlayerDTO> Get()
         {
             var username = User.Identity.Name;
-            var player = await _service.GetByUsername(username);
+            var player = await _service.GetByUsername(username).ConfigureAwait(false);
             return _mapper.Map<PlayerDTO>(player);
         }
 
@@ -52,7 +52,7 @@ namespace Spaceman.Controllers
         public async Task<PlayerDTO> Create([FromBody] PlayerCreateDTO value)
         {
             var player = _mapper.Map<Player>(value);
-            player = await _service.Create(player, value.Password);
+            player = await _service.Create(player, value.Password).ConfigureAwait(false);
             return _mapper.Map<PlayerDTO>(player);
         }
         
@@ -65,7 +65,7 @@ namespace Spaceman.Controllers
         [HttpPost("authenticate")]
         public async Task<PlayerAuthenticated> Authenticate([FromBody]PlayerAuth auth)
         {
-            var player = await _service.Authenticate(auth.Username, auth.Password);
+            var player = await _service.Authenticate(auth.Username, auth.Password).ConfigureAwait(false);
 
             if (player == null)
                 return null;

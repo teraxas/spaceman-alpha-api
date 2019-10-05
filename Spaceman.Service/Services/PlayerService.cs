@@ -62,18 +62,17 @@ namespace Spaceman.Service.Services
             return player;
         }
 
-        public Task<Player> Update(Player player)
+        public async Task<Player> Update(Player player)
         {
             FilterDefinition<Player> filter = Builders<Player>.Filter.Eq(p => p.Id, player.Id);
-            return _db.PlayerCollection.ReplaceOneAsync(filter, player)
-                .ContinueWith(r => player);
+            await _db.PlayerCollection.ReplaceOneAsync(filter, player);
+            return player;
         }
 
-        public Task<bool> CheckIfUsernameExists(string username)
+        public async Task<bool> CheckIfUsernameExists(string username)
         {
             FilterDefinition<Player> filter = Builders<Player>.Filter.Eq(p => p.Username, username);
-            return _db.PlayerCollection.CountDocumentsAsync(filter)
-                .ContinueWith(r => r.Result > 0);
+            return await _db.PlayerCollection.CountDocumentsAsync(filter) > 0;
         }
 
         public async Task<Player> GetByUsername(string username)
@@ -84,8 +83,8 @@ namespace Spaceman.Service.Services
 
         private static void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
+            if (password == null) throw new ArgumentNullException(nameof(password));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
 
             using (var hmac = new System.Security.Cryptography.HMACSHA512())
             {
@@ -96,10 +95,14 @@ namespace Spaceman.Service.Services
 
         private static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
         {
-            if (password == null) throw new ArgumentNullException("password");
-            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", "password");
-            if (storedHash.Length != 64) throw new ArgumentException("Invalid length of password hash (64 bytes expected).", "passwordHash");
-            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", "passwordHash");
+            if (password == null) throw new ArgumentNullException(nameof(password));
+            if (string.IsNullOrWhiteSpace(password)) throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
+            if (storedHash.Length != 64)
+            {
+                throw new ArgumentException("Invalid length of password hash (64 bytes expected).", nameof(storedHash));
+            }
+
+            if (storedSalt.Length != 128) throw new ArgumentException("Invalid length of password salt (128 bytes expected).", nameof(storedSalt));
 
             using (var hmac = new System.Security.Cryptography.HMACSHA512(storedSalt))
             {
