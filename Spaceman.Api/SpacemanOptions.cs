@@ -8,7 +8,7 @@ namespace Spaceman
     public class SpacemanOptions
     {
         public string Secret { get; set; }
-        public Uri MainUrl { get; set; } = new Uri("");
+        public Uri MainUrl { get; set; }
 
     }
 }
