@@ -13,6 +13,7 @@ using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
+using Spaceman.Service;
 
 namespace Spaceman
 {
@@ -33,6 +34,7 @@ namespace Spaceman
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
             var appSettings = Configuration.GetSection("Spaceman").Get<SpacemanOptions>();
+
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
             services.AddAuthentication(x =>
             {
@@ -68,13 +70,14 @@ namespace Spaceman
                 });
             });
 
-            services.AddAutoMapper();
-            services.Configure<SpacemanOptions>(Configuration.GetSection("Spaceman"));
-            services.Configure<Service.SpacemanServiceOptions>(Configuration.GetSection("SpacemanService"));
+            var serviceOptions = new SpacemanServiceOptions();
+            Configuration.GetSection("SpacemanService").Bind(serviceOptions);
+            services.AddHealthChecks()
+                .AddMongoDb(serviceOptions.ConnectionString);
 
-            services.AddSingleton<MongoProvider>();
-            services.AddSingleton<IPlayerService, PlayerService>();
-            services.AddSingleton<ILocationService, LocationService>();
+            services.AddSpacemanService(Configuration);
+
+            services.Configure<SpacemanOptions>(Configuration.GetSection("Spaceman"));
 
         }
 
