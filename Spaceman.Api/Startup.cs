@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
-// using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -10,8 +9,6 @@ using Spaceman.Service.Utilities;
 using Spaceman.Service.Services;
 using AutoMapper;
 using System.Text;
-// using Microsoft.AspNetCore.Authentication.JwtBearer;
-// using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using Spaceman.Service;
 using Microsoft.Extensions.Hosting;
@@ -61,17 +58,6 @@ namespace Spaceman
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Spaceman API", Version = "v1" });
-                // c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
-                // {
-                //     { "Bearer", Array.Empty<string>() }
-                // });
-                // c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                // {
-                //     Description = "Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-                //     In = "header",
-                //     Name = "Authorization",
-                //     Type = "apiKey"
-                // });
                 c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
                 {
                     Description =
