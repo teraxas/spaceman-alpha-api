@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
+// using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Swashbuckle.AspNetCore.Swagger;
@@ -10,10 +10,14 @@ using Spaceman.Service.Utilities;
 using Spaceman.Service.Services;
 using AutoMapper;
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
+// using Microsoft.AspNetCore.Authentication.JwtBearer;
+// using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Mvc;
 using Spaceman.Service;
+using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Spaceman
 {
@@ -31,7 +35,7 @@ namespace Spaceman
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddControllers();
 
             var appSettings = Configuration.GetSection("Spaceman").Get<SpacemanOptions>();
 
@@ -56,17 +60,39 @@ namespace Spaceman
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "Spaceman API", Version = "v1" });
-                c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "Spaceman API", Version = "v1" });
+                // c.AddSecurityRequirement(new Dictionary<string, IEnumerable<string>>
+                // {
+                //     { "Bearer", Array.Empty<string>() }
+                // });
+                // c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                // {
+                //     Description = "Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
+                //     In = "header",
+                //     Name = "Authorization",
+                //     Type = "apiKey"
+                // });
+                c.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme()
                 {
-                    { "Bearer", Array.Empty<string>() }
-                });
-                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
-                {
-                    Description = "Authorization header using the Bearer scheme. Example: \"bearer {token}\"",
-                    In = "header",
+                    Description =
+                            "JWT Authorization header using the Bearer scheme."
+                            + "\r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
                     Name = "Authorization",
-                    Type = "apiKey"
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+                c.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement() {
+                    {
+                        new OpenApiSecurityScheme()
+                        {
+                            Reference = new OpenApiReference{
+                                Id = "Bearer", //The name of the previously defined security scheme.
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new List<string>()
+                    }
                 });
             });
 
@@ -82,7 +108,7 @@ namespace Spaceman
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -97,7 +123,6 @@ namespace Spaceman
                 .AllowAnyHeader()
                 );
 
-            app.UseAuthentication();
             app.UseDefaultFiles();
             app.UseStaticFiles();
 
@@ -107,7 +132,13 @@ namespace Spaceman
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "Spaceman API V1");
             });
 
-            app.UseMvc();
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+            app.UseEndpoints(c =>
+            {
+                c.MapControllers();
+            });
         }
 
     }

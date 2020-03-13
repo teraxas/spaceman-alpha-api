@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <StartupObject>Spaceman.Loader.Program</StartupObject>
     <UserSecretsId>e56788a1-297b-4c03-8984-f2f997abf640</UserSecretsId>
     <CodeAnalysisRuleSet>../Style.ruleset</CodeAnalysisRuleSet>
